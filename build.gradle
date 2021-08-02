@@ -11,14 +11,19 @@ buildscript {
 }
 apply plugin: 'io.codearte.nexus-staging'
 apply plugin: 'java'
+apply plugin: 'idea'
+
+sourceCompatibility = 1.8
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
+    compile "com.google.guava:guava:16+"
     compile 'com.fasterxml.jackson.core:jackson-databind:2.11.1'
     compile 'org.apache.commons:commons-csv:1.5'
+    compile 'org.apache.httpcomponents:httpclient:4.5.13'
     testCompile 'junit:junit:4.13'
 }
 
@@ -104,4 +109,10 @@ if (project.hasProperty('release')) {
 nexusStaging {
     username = ossrhUser
     password = ossrhPassword
+}
+
+idea {
+    project {
+        languageLevel = '1.8'
+    }
 }

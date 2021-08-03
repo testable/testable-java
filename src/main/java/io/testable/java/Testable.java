@@ -27,7 +27,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * Main entry point for creating a java driver for use on the Testable platform as well as a set of useful
  * utilities like taking screenshots and reporting custom metrics.
  */
-public class TestableJava {
+public class Testable {
 
     public static final String OUTPUT_DIR = System.getProperty("OUTPUT_DIR");
     public static final String REGION_NAME = System.getProperty("TESTABLE_REGION_NAME");
@@ -69,7 +69,7 @@ public class TestableJava {
      * Example:
      *
      * <pre>
-     * {@code TestableJava.reportMetric(TestableMetric.newCounterBuilder()
+     * {@code Testable.reportMetric(TestableMetric.newCounterBuilder()
      *     .withName("My Request Counter")
      *     .withVal(1)
      *     .withUnits("requests")

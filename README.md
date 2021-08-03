@@ -30,7 +30,7 @@ A simple example test would look as follows:
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import io.testable.java.TestableJava;
+import io.testable.java.Testable;
 
 public class TestableExample {
 
@@ -66,7 +66,7 @@ duration, and any errors that occurred.
 In the results you can see these within the Assertions widget. For example:
 
 ```java
-TestableTest test = TestableJava.startTest("Google Related");
+TestableTest test = Testable.startTest("Google Related");
 test.startStep("Open google home page");
 
 
@@ -91,7 +91,7 @@ more details.
 Counter Example:
 
 ```java
-TestableJava.reportMetric(TestableMetric.newCounterBuilder()
+Testable.reportMetric(TestableMetric.newCounterBuilder()
         .withName("My Request Counter")
         .withVal(1)
         .withUnits("requests")
@@ -106,7 +106,7 @@ Timing Example:
 long start = System.currentTimeMillis();
 
 long loadTime = System.currentTimeMillis() - start;
-TestableJava.reportMetric(TestableMetric.newTimingBuilder()
+Testable.reportMetric(TestableMetric.newTimingBuilder()
             .withName("Page Load Time")
             .withVal(loadTime)
             .withUnits("ms")
@@ -120,7 +120,7 @@ Histogram Example:
 
 ```java
 String status = "MyStatus";
-TestableJava.reportMetric(TestableMetric.newHistogramBuilder()
+Testable.reportMetric(TestableMetric.newHistogramBuilder()
             .withName("Status Histogram")
             .withKey(status)
             .withVal(1)
@@ -142,11 +142,11 @@ Fatal logging will cause the test run to stop immediately.
 Example:
 
 ```java
-TestableJava.log(TestableLog.Level.Trace, "detailed stuff for smoke test only");
-TestableJava.log(TestableLog.Level.Debug, "my debug message");
-TestableJava.log(TestableLog.Level.Info, "some info");
-TestableJava.log(TestableLog.Level.Error, new RuntimeException("An error occurred"));
-TestableJava.log(TestableLog.Level.Fatal, new RuntimeException("Something bad happened stop everything!"));
+Testable.log(TestableLog.Level.Trace, "detailed stuff for smoke test only");
+Testable.log(TestableLog.Level.Debug, "my debug message");
+Testable.log(TestableLog.Level.Info, "some info");
+Testable.log(TestableLog.Level.Error, new RuntimeException("An error occurred"));
+Testable.log(TestableLog.Level.Fatal, new RuntimeException("Something bad happened stop everything!"));
 ```
 
 ## Read from CSV
@@ -159,7 +159,7 @@ It is assumed your CSV has a header row with column names.
 is considered row 0.
 
 ```java
-TestableCSVReader reader = TestableJava.readCsv("credentials.csv");
+TestableCSVReader reader = Testable.readCsv("credentials.csv");
 CSVRecord record = reader.get(2);
 System.out.println(record.get("username"));
 ```
@@ -167,7 +167,7 @@ System.out.println(record.get("username"));
 **Get random row**: Returns a random row from the CSV.
 
 ```java
-TestableCSVReader reader = TestableJava.readCsv("credentials.csv");
+TestableCSVReader reader = Testable.readCsv("credentials.csv");
 CSVRecord record = reader.random();
 System.out.println(record.get("username"));
 ```
@@ -177,7 +177,7 @@ This means that the rows in the CSV will be evenly distributed across all
 virtual users that are part of your test execution.
 
 ```java
-TestableCSVReader reader = TestableJava.readCsv("credentials.csv");
+TestableCSVReader reader = Testable.readCsv("credentials.csv");
 CSVRecord record = reader.next();
 System.out.println(record.get("username"));
 ```
@@ -195,5 +195,13 @@ The method also returns a Map of all metrics captured in addition to
 automatically reporting it back into the test results.
 
 ```java
-TestableJava.collectPerformanceMetrics(driver);
+Testable.collectPerformanceMetrics(driver);
 ```
+
+mvn install:install-file \
+-Dfile=./build/libs/testable-java-all-0.0.1.jar \
+-DgroupId=io.testable \
+-DartifactId=testable-java \
+-Dversion=0.0.1 \
+-Dpackaging=jar \
+-DgeneratePom=true

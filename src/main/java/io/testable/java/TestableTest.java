@@ -125,7 +125,7 @@ public class TestableTest {
     }
 
     private static void write(String type, Object event) {
-        TestableJava.writeToStream(new TestableJava.Result(type, event));
+        Testable.writeToStream(new Testable.Result(type, event));
     }
 
 

@@ -36,20 +36,6 @@ public class Testable {
     public static final String PROXY_AUTOCONFIG_URL = System.getProperty("PROXY_AUTOCONFIG_URL");
     public static final String RESULT_FILE = System.getProperty("TESTABLE_RESULT_FILE");
 
-    private static String RUM_SPEEDINDEXJS;
-
-    static {
-        try {
-            URL url = Resources.getResource("rum-speedindex.js");
-            RUM_SPEEDINDEXJS = Resources.toString(url, Charsets.UTF_8);
-        } catch (Exception e) {
-            System.out.println("Issue reading rum-speedindex.js from file");
-            e.printStackTrace();
-            RUM_SPEEDINDEXJS = null;
-        }
-    }
-
-
     private static PrintWriter resultStream;
 
     static {
